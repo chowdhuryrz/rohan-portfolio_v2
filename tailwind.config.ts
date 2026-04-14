@@ -20,6 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				inter: ['Inter', 'sans-serif'],
+				mono: ['JetBrains Mono', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -31,8 +32,7 @@ export default {
 					muted: 'hsl(var(--text-muted))',
 				},
 				accent: {
-					cyan: 'hsl(var(--accent-cyan))',
-					navy: 'hsl(var(--accent-navy))',
+					green: 'hsl(var(--accent-green))',
 				},
 				hover: {
 					bg: 'hsl(var(--hover-bg))',
@@ -49,14 +49,7 @@ export default {
 			backgroundImage: {
 				'gradient-portfolio': 'var(--background-gradient)',
 			},
-			fontWeight: {
-				light: 'var(--font-light)',
-				normal: 'var(--font-normal)',
-				medium: 'var(--font-medium)',
-				semibold: 'var(--font-semibold)',
-				bold: 'var(--font-bold)',
-			},
-			transitionTimingFunction: {
+transitionTimingFunction: {
 				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
 				'spring': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
 			},

@@ -1,215 +1,258 @@
-import {
-  ExternalLink,
-  ArrowUpRight,
-  Star,
-  Download,
-  Github,
-} from "lucide-react";
+import { ExternalLink, ArrowUpRight, Github } from "lucide-react";
 import { EXPERIENCES, PROJECTS, ABOUT_SECTIONS } from "@/config/data";
 import { RESUME_URL, SOCIAL_LINKS, CONTACT } from "@/config/constants";
+import { Certifications } from "./Certifications";
+import { useInView } from "@/hooks/useInView";
+
+const SectionWrapper = ({
+  id,
+  children,
+  delay = 0,
+}: {
+  id: string;
+  children: React.ReactNode;
+  delay?: number;
+}) => {
+  const [ref, inView] = useInView<HTMLElement>(0.08);
+  return (
+    <section
+      id={id}
+      ref={ref}
+      className={`reveal ${inView ? "visible" : ""}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </section>
+  );
+};
 
 export const RightContent = () => {
   return (
-    <div className="pt-4 xl:pt-24 px-6 xl:px-0">
-      <main className="max-w-[720px] space-y-12 xl:space-y-32">
-        {/* About Section */}
-        <section id="about" data-section>
-          <div className="space-y-4">
-            {ABOUT_SECTIONS.map((paragraph, index) => (
-              <p
-                key={index}
-                className="text-text-secondary leading-relaxed text-base font-light"
-              >
-                {paragraph
-                  .split(
-                    /(\bAllstate Sales Group\b|\bFrontend Simplified\b|\bMcGill Scheduler\b|\bEmpor\b|\bReact\b|\bNext\.js\b|\bTypeScript\b|\bNode\.js\b|\bPostgreSQL\b|\bAWS\b)/
-                  )
-                  .map((part, partIndex) => {
-                    if (
-                      [
-                        "Allstate Sales Group",
-                        "Frontend Simplified",
-                        "McGill Scheduler",
-                        "Empor",
-                        "React",
-                        "Next.js",
-                        "TypeScript",
-                        "Node.js",
-                        "PostgreSQL",
-                        "AWS",
-                      ].includes(part)
-                    ) {
-                      return (
-                        <span
-                          key={partIndex}
-                          className="text-text-primary font-light"
-                        >
-                          {part}
-                        </span>
-                      );
-                    }
-                    return part;
-                  })}
-              </p>
-            ))}
-          </div>
-        </section>
+    <main className="relative z-10 space-y-24 pb-24">
 
-        {/* Experience Section */}
-        <section id="experience" data-section>
-          <div className="space-y-8 xl:space-y-12">
-            {EXPERIENCES.map((experience, index) => (
-              <div key={index} className="group experience-card">
-                <div className="grid grid-cols-1 xl:grid-cols-4 gap-10">
-                  <div className="xl:col-span-1">
-                    <div className="text-text-muted text-xs uppercase tracking-wide font-medium xl:whitespace-nowrap xl:sticky xl:top-8">
-                      {experience.period}
-                    </div>
-                  </div>
-                  <div className="xl:col-span-3">
-                    <h3 className="experience-title-link">
-                      {experience.title} · {experience.company}
-                    </h3>
-                    <p className="text-text-secondary leading-relaxed text-sm font-light mb-3">
-                      {experience.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {experience.technologies.map((tech) => (
-                        <span key={tech} className="tech-pill text-xs">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+      {/* About */}
+      <SectionWrapper id="about">
+        <h2 className="section-heading">About</h2>
+        <div className="space-y-4">
+          {ABOUT_SECTIONS.map((paragraph, i) => (
+            <p
+              key={i}
+              className="leading-relaxed text-sm md:text-base font-light"
+              style={{ color: "hsl(var(--text-secondary))" }}
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* Experience */}
+      <SectionWrapper id="experience">
+        <h2 className="section-heading">Experience</h2>
+        <div className="space-y-6">
+          {EXPERIENCES.map((exp, i) => (
+            <div key={i} className="group experience-card">
+              <div className="flex flex-col sm:flex-row sm:gap-8">
+                <div className="sm:w-36 flex-shrink-0 mb-2 sm:mb-0">
+                  <span
+                    className="text-xs uppercase tracking-wide leading-relaxed"
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      color: "hsl(var(--text-muted))",
+                    }}
+                  >
+                    {exp.period}
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="experience-title-link">
+                    {exp.title}
+                    <span style={{ color: "hsl(var(--text-muted))" }}>·</span>
+                    {exp.company}
+                  </h3>
+                  <p
+                    className="leading-relaxed text-sm font-light mb-3"
+                    style={{ color: "hsl(var(--text-secondary))" }}
+                  >
+                    {exp.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech) => (
+                      <span key={tech} className="tech-pill">{tech}</span>
+                    ))}
                   </div>
                 </div>
               </div>
-            ))}
-
-            <div className="mt-12">
-              <a
-                href={RESUME_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white underline decoration-white/20 hover:decoration-white transition-colors"
-              >
-                View Full Résumé
-                <ArrowUpRight className="w-4 h-4 inline ml-1" />
-              </a>
             </div>
-          </div>
-        </section>
+          ))}
 
-        {/* Projects Section */}
-        <section id="projects" data-section>
-          <div className="space-y-8 xl:space-y-12">
-            {PROJECTS.map((project, index) => (
-              <div key={index} className="group experience-card">
-                <div className="grid grid-cols-1 xl:grid-cols-4 gap-4">
-                  <div className="xl:col-span-1">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full aspect-video object-contain rounded border border-text-muted/20 xl:sticky xl:top-8"
-                    />
-                  </div>
-                  <div className="xl:col-span-3">
-                    <h3 className="experience-title-link gap-2">
-                      {project.title}
-                      <div className="flex gap-2">
-                        {project.links.external && (
-                          <a
-                            href={project.links.external}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-text-muted hover:text-text-primary transition-colors"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        )}
-                        {project.links.github && (
-                          <a
-                            href={project.links.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-text-muted hover:text-text-primary transition-colors"
-                          >
-                            <Github className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
-                    </h3>
-
-                    <p className="text-text-secondary leading-relaxed text-sm font-light mb-3">
-                      {project.description}
-                    </p>
-
-                    {"stars" in project && (
-                      <div className="flex items-center gap-1 mb-3">
-                        <Star className="w-4 h-4 text-text-muted" />
-                        <span className="text-text-muted text-sm">
-                          {project.stars.toLocaleString()}
-                        </span>
-                      </div>
-                    )}
-
-                    {"downloads" in project && (
-                      <div className="flex items-center gap-1 mb-3">
-                        <Download className="w-4 h-4 text-text-muted" />
-                        <span className="text-text-muted text-sm">
-                          {project.downloads}
-                        </span>
-                      </div>
-                    )}
-
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <span key={tech} className="tech-pill text-xs">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            <div className="mt-12">
-              <a
-                href={SOCIAL_LINKS.find((link) => link.name === "github")?.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white underline decoration-white/20 hover:decoration-white transition-colors"
-              >
-                View Full Project Archive
-                <ArrowUpRight className="w-4 h-4 inline ml-1" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact */}
-        <section className="pt-8 xl:pt-12">
-          <p className="text-text-secondary leading-relaxed text-base font-light mb-6">
-            I'm always interested in new opportunities and interesting projects.
-            Feel free to reach out if you'd like to connect.
-          </p>
           <a
-            href={`mailto:${CONTACT.email}`}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200 font-medium"
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm transition-colors duration-200"
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              color: "hsl(var(--text-muted))",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "hsl(var(--accent-green))")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "hsl(var(--text-muted))")
+            }
           >
-            Get In Touch
-            <ArrowUpRight className="w-4 h-4" />
+            View Full Résumé <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
-        </section>
+        </div>
+      </SectionWrapper>
 
-        {/* Footer */}
-        <footer className="pt-12 xl:pt-16 pb-16 xl:pb-24">
-          <p className="text-white/50 text-sm leading-relaxed">
-            © {new Date().getFullYear()} Rohan Chowdhury. Designed and built
-            with attention to detail.
-          </p>
-        </footer>
-      </main>
-    </div>
+      {/* Projects */}
+      <SectionWrapper id="projects">
+        <h2 className="section-heading">Projects</h2>
+        <div className="space-y-3">
+          {PROJECTS.map((project, i) => (
+            <div key={i} className="project-card group">
+              {/* Case ID header */}
+              <div className="project-card-header">
+                <span className="project-case-id">
+                  [CASE-{String(i + 1).padStart(3, "0")}]
+                </span>
+                <span className="project-category">{project.technologies[0]}</span>
+              </div>
+
+              {/* Body */}
+              <div className="project-card-body">
+                {/* Title + links */}
+                <div className="project-title-row">
+                  <span className="project-title">{project.title}</span>
+                  <div className="project-links">
+                    {project.links.external && (
+                      <a
+                        href={project.links.external}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition-colors duration-200"
+                        style={{ color: "hsl(var(--text-muted))" }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.color = "hsl(var(--accent-green))")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.color = "hsl(var(--text-muted))")
+                        }
+                        aria-label="Live demo"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition-colors duration-200"
+                        style={{ color: "hsl(var(--text-muted))" }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.color = "hsl(var(--accent-green))")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.color = "hsl(var(--text-muted))")
+                        }
+                        aria-label="GitHub repository"
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="project-description">{project.description}</p>
+
+                {/* Tech flags */}
+                <div className="project-flags">
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className="project-flag">
+                      --{tech.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <a
+            href={SOCIAL_LINKS.find((l) => l.name === "github")?.href ?? "https://github.com/chowdhuryrz"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm transition-colors duration-200"
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              color: "hsl(var(--text-muted))",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "hsl(var(--accent-green))")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "hsl(var(--text-muted))")
+            }
+          >
+            View GitHub Profile <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </SectionWrapper>
+
+      {/* Certifications */}
+      <SectionWrapper id="certifications">
+        <h2 className="section-heading">Certifications</h2>
+        <Certifications />
+      </SectionWrapper>
+
+      {/* Contact */}
+      <SectionWrapper id="contact">
+        <h2 className="section-heading">Contact</h2>
+        <p
+          className="text-sm md:text-base font-light leading-relaxed mb-6"
+          style={{ color: "hsl(var(--text-secondary))" }}
+        >
+          Open to new opportunities in cybersecurity. Feel free to reach out if
+          you'd like to connect or collaborate.
+        </p>
+        <a
+          href={`mailto:${CONTACT.email}`}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded text-sm transition-all duration-200"
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            background: "hsl(var(--accent-green-dim))",
+            color: "hsl(var(--accent-green))",
+            border: "1px solid hsl(var(--accent-green-border))",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "hsl(var(--accent-green) / 0.2)";
+            e.currentTarget.style.boxShadow = "0 0 16px hsl(var(--accent-green-glow))";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "hsl(var(--accent-green-dim))";
+            e.currentTarget.style.boxShadow = "none";
+          }}
+        >
+          {CONTACT.email}
+          <ArrowUpRight className="w-3.5 h-3.5" />
+        </a>
+      </SectionWrapper>
+
+      {/* Footer */}
+      <footer className="pt-4 pb-16">
+        <p
+          className="text-xs"
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            color: "hsl(var(--text-muted) / 0.5)",
+          }}
+        >
+          © {new Date().getFullYear()} {CONTACT.name}
+        </p>
+      </footer>
+    </main>
   );
 };
