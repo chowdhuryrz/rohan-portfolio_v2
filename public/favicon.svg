@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <rect width="80" height="80" rx="14" fill="#0b0e0b"/>
+  <!-- Corner brackets -->
+  <path d="M22 32 L22 22 L32 22" stroke="hsl(142,69%,58%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M48 22 L58 22 L58 32" stroke="hsl(142,69%,58%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 48 L22 58 L32 58" stroke="hsl(142,69%,58%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M48 58 L58 58 L58 48" stroke="hsl(142,69%,58%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Inner crosshair ring -->
+  <circle cx="40" cy="40" r="4" stroke="hsl(142,69%,58%)" stroke-width="1.5"/>
+  <!-- Center dot -->
+  <circle cx="40" cy="40" r="1.5" fill="hsl(142,69%,58%)"/>
+  <!-- Tick marks -->
+  <line x1="40" y1="30" x2="40" y2="34" stroke="hsl(142,69%,58%)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="40" y1="46" x2="40" y2="50" stroke="hsl(142,69%,58%)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="30" y1="40" x2="34" y2="40" stroke="hsl(142,69%,58%)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="46" y1="40" x2="50" y2="40" stroke="hsl(142,69%,58%)" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
