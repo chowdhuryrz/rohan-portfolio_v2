@@ -5,15 +5,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-bun dev          # Start dev server (Vite)
-bun build        # Production build
-bun lint         # ESLint check
-bun lint:fix     # ESLint auto-fix
-bun type-check   # TypeScript check (no emit)
-bun preview      # Preview production build
+npm run dev          # Start dev server (Vite)
+npm run build        # Production build
+npm run lint         # ESLint check
+npm run lint:fix     # ESLint auto-fix
+npm run type-check   # TypeScript check (no emit)
+npm run preview      # Preview production build
 ```
-
-If `bun` is not available, fall back to `npm run dev`, `npx tsc --noEmit`, `npx eslint src/`, etc.
 
 No test suite is configured.
 
