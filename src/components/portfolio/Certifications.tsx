@@ -32,6 +32,45 @@ const SubHeading = ({ label }: { label: string }) => (
 export const Certifications = () => {
   return (
     <div className="space-y-10">
+      {/* Education */}
+      <div>
+        <SubHeading label="Education" />
+        <div className="space-y-3">
+          {EDUCATION.map((edu, index) => (
+            <div key={index} className="group experience-card">
+              <div className="flex items-center gap-4">
+                <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                  <WguLogo className="w-6 h-6" />
+                </div>
+                <div>
+                  <p
+                    className="text-sm font-medium"
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      color: "hsl(var(--text-primary))",
+                    }}
+                  >
+                    {edu.degree}
+                  </p>
+                  <p className="text-xs mt-0.5" style={{ color: "hsl(var(--text-muted))" }}>
+                    {edu.school} · {edu.date}
+                    <span
+                      className="ml-2 text-xs"
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        color: "hsl(var(--accent-green))",
+                      }}
+                    >
+                      [in progress]
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Certifications */}
       <div>
         <SubHeading label="Certifications" />
@@ -86,44 +125,6 @@ export const Certifications = () => {
         </div>
       </div>
 
-      {/* Education */}
-      <div>
-        <SubHeading label="Education" />
-        <div className="space-y-3">
-          {EDUCATION.map((edu, index) => (
-            <div key={index} className="group experience-card">
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
-                  <WguLogo className="w-6 h-6" />
-                </div>
-                <div>
-                  <p
-                    className="text-sm font-medium"
-                    style={{
-                      fontFamily: "'JetBrains Mono', monospace",
-                      color: "hsl(var(--text-primary))",
-                    }}
-                  >
-                    {edu.degree}
-                  </p>
-                  <p className="text-xs mt-0.5" style={{ color: "hsl(var(--text-muted))" }}>
-                    {edu.school} · {edu.date}
-                    <span
-                      className="ml-2 text-xs"
-                      style={{
-                        fontFamily: "'JetBrains Mono', monospace",
-                        color: "hsl(var(--accent-green))",
-                      }}
-                    >
-                      [in progress]
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };

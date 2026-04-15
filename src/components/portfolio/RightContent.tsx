@@ -229,9 +229,9 @@ export const RightContent = () => {
         </div>
       </SectionWrapper>
 
-      {/* Certifications */}
+      {/* Education & Certifications */}
       <SectionWrapper id="certifications">
-        <h2 className="section-heading">Certifications</h2>
+        <h2 className="section-heading">Education & Certifications</h2>
         <Certifications />
       </SectionWrapper>
 
