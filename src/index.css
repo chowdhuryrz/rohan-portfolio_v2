@@ -50,19 +50,6 @@
     position: relative;
   }
 
-  /* Subtle grid overlay for depth */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(hsl(142 69% 58% / 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(142 69% 58% / 0.025) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
   /* Vignette */
   body::after {
     content: '';
@@ -87,6 +74,51 @@
 }
 
 @layer components {
+  /* ── Fingerprint background positioning ── */
+  .fingerprint-bg {
+    position: absolute;
+    top: -200px;
+    right: -380px;
+    width: 1050px;
+    height: 1260px;
+    transform: rotate(142deg) scaleY(-1);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .fingerprint-bg {
+      width: 480px;
+      height: 576px;
+      top: -80px;
+      right: -180px;
+    }
+  }
+
+  /* ── Fingerprint background (full shape draw/erase) ── */
+  .fingerprint-draw {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: fp-draw 60s ease-in-out infinite;
+  }
+
+  @keyframes fp-draw {
+    0%   { stroke-dashoffset: 1000; opacity: 0; }
+    8%   { opacity: 0.35; }
+    42%  { stroke-dashoffset: 0; opacity: 0.35; }
+    58%  { stroke-dashoffset: 0; opacity: 0.35; }
+    92%  { opacity: 0.35; }
+    100% { stroke-dashoffset: 1000; opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fingerprint-draw {
+      animation: none;
+      stroke-dashoffset: 0;
+      opacity: 0.25;
+    }
+  }
+
   /* ── Fingerprint background ── */
   .fingerprint-ridge {
     fill: none;

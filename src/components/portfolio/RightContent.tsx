@@ -31,7 +31,7 @@ export const RightContent = () => {
   const [hoveredBullet, setHoveredBullet] = useState<{ expIndex: number; pointIndex: number } | null>(null);
 
   return (
-    <main className="relative z-10 space-y-24 pb-24">
+    <main className="relative z-10 space-y-16 md:space-y-24 pb-16 md:pb-24">
 
       {/* About */}
       <SectionWrapper id="about">
@@ -247,7 +247,7 @@ export const RightContent = () => {
         </p>
         <a
           href={`mailto:${CONTACT.email}`}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded text-sm transition-all duration-200"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded text-sm transition-all duration-200 break-all sm:break-normal"
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             background: "hsl(var(--accent-green-dim))",

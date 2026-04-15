@@ -29,7 +29,7 @@ export const Hero = () => {
       </p>
 
       {/* Name */}
-      <h1 className="hero-line hero-line-2 hero-name text-5xl md:text-6xl mb-5">
+      <h1 className="hero-line hero-line-2 hero-name text-4xl sm:text-5xl md:text-6xl mb-5">
         {CONTACT.name}
         <span className="cursor-blink" />
       </h1>
