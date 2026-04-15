@@ -332,6 +332,10 @@
   @keyframes blink { 50% { opacity: 0; } }
 
   /* ── Bullet list entrance ── */
+  .bullet-fade-in {
+    animation: bullet-fade-in 0.3s ease both;
+  }
+
   @keyframes bullet-fade-in {
     from {
       opacity: 0;

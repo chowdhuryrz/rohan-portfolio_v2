@@ -73,16 +73,15 @@ export const RightContent = () => {
                     <span style={{ color: "hsl(var(--text-muted))" }}>·</span>
                     {exp.company}
                   </h3>
-                  <ul className="space-y-1.5 mb-3">
+                  <ul className="space-y-1.5 mb-3 list-none">
                     {exp.points.map((point, j) => {
                       const isHovered = hoveredBullet?.expIndex === i && hoveredBullet?.pointIndex === j;
                       return (
                         <li
                           key={j}
-                          className="flex gap-2 text-sm font-light leading-relaxed"
+                          className="flex gap-2 text-sm font-light leading-relaxed bullet-fade-in"
                           style={{
                             color: isHovered ? "hsl(var(--text-primary))" : "hsl(var(--text-secondary))",
-                            animation: "bullet-fade-in 0.3s ease both",
                             animationDelay: `${j * 60}ms`,
                           }}
                           onMouseEnter={() => setHoveredBullet({ expIndex: i, pointIndex: j })}
