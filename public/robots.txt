@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://rohandev.vercel.app/sitemap.xml
