@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ExternalLink, ArrowUpRight, Github } from "lucide-react";
 import { EXPERIENCES, PROJECTS, ABOUT_SECTIONS } from "@/config/data";
 import { RESUME_URL, SOCIAL_LINKS, CONTACT } from "@/config/constants";
@@ -27,6 +28,8 @@ const SectionWrapper = ({
 };
 
 export const RightContent = () => {
+  const [hoveredBullet, setHoveredBullet] = useState<{ expIndex: number; pointIndex: number } | null>(null);
+
   return (
     <main className="relative z-10 space-y-24 pb-24">
 
@@ -70,12 +73,37 @@ export const RightContent = () => {
                     <span style={{ color: "hsl(var(--text-muted))" }}>·</span>
                     {exp.company}
                   </h3>
-                  <p
-                    className="leading-relaxed text-sm font-light mb-3"
-                    style={{ color: "hsl(var(--text-secondary))" }}
-                  >
-                    {exp.description}
-                  </p>
+                  <ul className="space-y-1.5 mb-3">
+                    {exp.points.map((point, j) => {
+                      const isHovered = hoveredBullet?.expIndex === i && hoveredBullet?.pointIndex === j;
+                      return (
+                        <li
+                          key={j}
+                          className="flex gap-2 text-sm font-light leading-relaxed"
+                          style={{
+                            color: isHovered ? "hsl(var(--text-primary))" : "hsl(var(--text-secondary))",
+                            animation: "bullet-fade-in 0.3s ease both",
+                            animationDelay: `${j * 60}ms`,
+                          }}
+                          onMouseEnter={() => setHoveredBullet({ expIndex: i, pointIndex: j })}
+                          onMouseLeave={() => setHoveredBullet(null)}
+                        >
+                          <span
+                            style={{
+                              color: "hsl(var(--accent-green))",
+                              flexShrink: 0,
+                              marginTop: "2px",
+                              transform: isHovered ? "translateX(2px)" : "translateX(0)",
+                              transition: "transform 0.15s ease",
+                            }}
+                          >
+                            ▸
+                          </span>
+                          {point}
+                        </li>
+                      );
+                    })}
+                  </ul>
                   <div className="flex flex-wrap gap-2">
                     {exp.technologies.map((tech) => (
                       <span key={tech} className="tech-pill">{tech}</span>
