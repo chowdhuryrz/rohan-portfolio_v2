@@ -87,6 +87,28 @@
 }
 
 @layer components {
+  /* ── Hex background glyphs ── */
+  .hex-glyph {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.625rem;
+    color: hsl(var(--accent-green));
+    opacity: 0.06;
+    filter: drop-shadow(0 0 6px hsl(var(--accent-green) / 0.5));
+    animation: hex-pulse ease-in-out infinite;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  @keyframes hex-pulse {
+    0%, 100% { opacity: 0.04; }
+    50%       { opacity: 0.15; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hex-glyph { animation: none; opacity: 0; }
+  }
+
   /* ── Social icons ── */
   .social-icon {
     @apply transition-colors duration-300;
