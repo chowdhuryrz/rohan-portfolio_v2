@@ -6,8 +6,6 @@ export const EXPERIENCES = [
     companyUrl: "https://lognpacific.com",
     points: [
       "Conducted vulnerability scans with Tenable and implemented remediations using PowerShell, reducing critical vulnerabilities by 100%, high by 90%, and medium by 76% for the server team.",
-      "Performed vulnerability assessments and risk prioritization using Tenable across Windows and Linux environments, executing DISA STIG compliance audits to meet industry standards.",
-      "Automated remediation workflows and STIG implementations using PowerShell to systematically address critical vulnerabilities at scale.",
       "Developed custom detection rules in Microsoft Defender for Endpoint to automate isolation and investigation of compromised systems.",
       "Performed threat hunting using EDR to detect IoCs from brute force attacks, data exfiltration, and ransomware; designed and published scenarios for incident response tabletop exercises.",
       "Built Microsoft Sentinel dashboards using KQL to monitor logon failures and malicious traffic, and eliminated brute force incidents by implementing inbound NSG/firewall rules to restrict internet exposure.",
@@ -28,7 +26,6 @@ export const EXPERIENCES = [
     company: "ASG",
     companyUrl: null as string | null,
     points: [
-      "Built and maintained internal HR software for 500+ employees, managing access controls, API integrations, and data validation to keep company systems secure and accurate.",
       "Developed role-based access controls within internal admin tools by scoping permissions to user roles, reducing unauthorized access risk and cutting record management overhead by 65%.",
       "Integrated 12+ internal and external APIs using secure authentication and data validation logic to synchronize employee records, ensuring data integrity across operational systems.",
       "Implemented staging pipelines and replica database infrastructure to isolate production environments and improve fault tolerance, increasing platform uptime to 99.8%.",
