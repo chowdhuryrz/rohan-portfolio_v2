@@ -23,7 +23,7 @@ export const EXPERIENCES = [
   {
     period: "JAN 2023 - SEP 2025",
     title: "Software Engineer",
-    company: "ASG",
+    company: "Allstate Sales Group",
     companyUrl: null as string | null,
     points: [
       "Developed role-based access controls within internal admin tools by scoping permissions to user roles, reducing unauthorized access risk and cutting record management overhead by 65%.",
@@ -80,8 +80,9 @@ export const PROJECTS = [
 ];
 
 export const ABOUT_SECTIONS = [
-  "I'm a cybersecurity engineer with a background in software development. I came up building enterprise systems, which shapes how I think about the defensive side. Now I focus on blue team operations, threat detection, and vulnerability management using tools like Microsoft Sentinel, EDR platforms, and PowerShell.",
-  "Outside of work I'm at the gym or working on a car. Both keep me grounded.",
+  "I'm a cybersecurity engineer based in the US. I started out in software development building internal tools and integrating APIs, which gave me a strong foundation for understanding how systems get built and how they get broken.",
+  "These days I work on the defensive side: detecting threats, hunting for indicators of compromise, tightening up vulnerabilities, and building tooling to make security operations faster. My primary tools are Microsoft Sentinel, Defender for Endpoint, KQL, and PowerShell.",
+  "Outside of work I'm at the gym, keeping up with AI, biohacking, or building something new.",
 ] as const;
 
 export const CERTIFICATIONS = [

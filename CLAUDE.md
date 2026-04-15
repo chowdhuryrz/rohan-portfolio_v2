@@ -22,12 +22,13 @@ Single-page React portfolio, Vite + TypeScript + Tailwind CSS. All content is st
 **Component tree:**
 ```
 PortfolioLayout
-├── Hero               # name, typewriter tagline, social icon links
-└── RightContent       # scrollable sections wrapped in SectionWrapper
+├── FingerprintBackground  # animated SVG fingerprint, positioned absolutely behind content
+├── Hero                   # name, typewriter tagline, social icon links
+└── RightContent           # scrollable sections wrapped in SectionWrapper
     ├── About
     ├── Experience
     ├── Projects
-    ├── Certifications  ← own component (src/components/portfolio/Certifications.tsx)
+    ├── Education & Certifications  ← rendered by Certifications component (src/components/portfolio/Certifications.tsx)
     └── Contact + Footer
 ```
 
@@ -49,11 +50,17 @@ Design tokens are CSS custom properties in `src/index.css`. The full palette:
 | Variable | Value | Usage |
 |---|---|---|
 | `--accent-green` | `142 69% 58%` | primary green, all interactive elements |
+| `--accent-green-dim` | `142 69% 58% / 0.15` | pill/button backgrounds |
+| `--accent-green-glow` | `142 69% 58% / 0.25` | glow drop-shadows |
+| `--accent-green-border` | `142 69% 58% / 0.3` | pill/button borders |
 | `--text-primary` | `0 0% 96%` | headings |
 | `--text-secondary` | `0 0% 65%` | body text |
 | `--text-muted` | `0 0% 45%` | timestamps, labels |
 | `--background` | `120 5% 6%` | page bg |
+| `--card` | `120 5% 7.5%` | project card bg |
 | `--card-hover` | `120 5% 9%` | card hover bg |
+| `--border` | `120 8% 14%` | generic borders |
+| `--divider` | `120 5% 10%` | subtle dividers |
 
 Reference via `hsl(var(--accent-green))` in inline styles or CSS.
 
@@ -61,12 +68,21 @@ Reference via `hsl(var(--accent-green))` in inline styles or CSS.
 
 **Component utility classes** (defined in `src/index.css` `@layer components`):
 - `.tech-pill` — green pill badge for technology tags in experience cards
-- `.project-flag` — `--flag-style` tech tags in project cards
 - `.experience-card` — hover border/glow card wrapper
 - `.experience-title-link` — monospace title with hover green
 - `.social-icon` — muted icon with green hover glow
-- `.section-heading` — section title style
+- `.section-heading` — section title with `>_` prefix and trailing gradient rule
 - `.reveal` / `.visible` — scroll-reveal animation classes
+- `.hero-name` — JetBrains Mono bold with green text-shadow glow
+- `.hero-line` / `.hero-line-{1-5}` — staggered entrance animations for Hero elements
+- `.cursor-blink` — blinking green block cursor used in typewriter
+- `.bullet-fade-in` — slide-in animation for experience bullet points
+- `.project-card` — classified-intel-brief style card with bottom green underline on hover
+- `.project-card-header` / `.project-case-id` / `.project-category` — card header row
+- `.project-card-body` — padded card content area
+- `.project-title-row` / `.project-title` / `.project-links` — title + icon link row
+- `.project-description` — body text inside project card
+- `.project-flags` / `.project-flag` — `--flag-name` CLI-style tech tags
 
 **Hover pattern:** interactive elements use inline `onMouseEnter`/`onMouseLeave` to toggle between `--text-muted` and `--accent-green` rather than Tailwind hover classes, because Tailwind can't reference CSS variables in arbitrary values at runtime.
 
