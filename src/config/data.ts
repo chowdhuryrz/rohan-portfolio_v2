@@ -81,8 +81,7 @@ export const PROJECTS = [
 
 export const ABOUT_SECTIONS = [
   "I'm a cybersecurity engineer with a background in software development. I came up building enterprise systems, which shapes how I think about the defensive side. Now I focus on blue team operations, threat detection, and vulnerability management using tools like Microsoft Sentinel, EDR platforms, and PowerShell.",
-  "My background in software engineering shapes how I think about security. Building enterprise systems taught me how applications break under pressure, where data leaks, and what attackers are actually looking for. That context helps a lot on the defensive side.",
-  "When I'm not at a computer, I'm at the gym or working on a car. Both keep me grounded and remind me that good solutions come from understanding how things actually work, not just how they're supposed to.",
+  "Outside of work I'm at the gym or working on a car. Both keep me grounded.",
 ] as const;
 
 export const CERTIFICATIONS = [
