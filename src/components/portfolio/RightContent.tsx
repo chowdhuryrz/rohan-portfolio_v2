@@ -82,7 +82,7 @@ export const RightContent = () => {
                           className="flex gap-2 text-sm font-light leading-relaxed bullet-fade-in"
                           style={{
                             color: isHovered ? "hsl(var(--text-primary))" : "hsl(var(--text-secondary))",
-                            animationDelay: `${j * 60}ms`,
+                            animationDelay: `${600 + j * 60}ms`,
                           }}
                           onMouseEnter={() => setHoveredBullet({ expIndex: i, pointIndex: j })}
                           onMouseLeave={() => setHoveredBullet(null)}
