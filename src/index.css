@@ -87,6 +87,43 @@
 }
 
 @layer components {
+  /* ── Fingerprint background ── */
+  .fingerprint-ridge {
+    fill: none;
+    stroke: hsl(var(--accent-green));
+    stroke-width: 1.5;
+    stroke-dasharray: 1000;
+    animation-name: ridge-draw, ridge-glow;
+    animation-duration: 1.8s, 5s;
+    animation-fill-mode: both, none;
+    animation-timing-function: ease, ease-in-out;
+    animation-iteration-count: 1, infinite;
+  }
+
+  @keyframes ridge-draw {
+    from { stroke-dashoffset: 1000; opacity: 0; }
+    to   { stroke-dashoffset: 0; opacity: 0.55; }
+  }
+
+  @keyframes ridge-glow {
+    0%, 100% {
+      opacity: 0.45;
+      filter: drop-shadow(0 0 3px hsl(var(--accent-green) / 0.45));
+    }
+    50% {
+      opacity: 0.75;
+      filter: drop-shadow(0 0 10px hsl(var(--accent-green) / 0.7));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fingerprint-ridge {
+      animation: none;
+      stroke-dashoffset: 0;
+      opacity: 0.4;
+    }
+  }
+
   /* ── Social icons ── */
   .social-icon {
     @apply transition-colors duration-300;
