@@ -1,43 +1,66 @@
-const GLYPHS = [
-  { text: "0xA3F2",   left: 3,  top: 8,  delay: 0,   duration: 7  },
-  { text: "> INIT",   left: 6,  top: 32, delay: 1.5, duration: 9  },
-  { text: "FF:00:AC", left: 2,  top: 58, delay: 3,   duration: 11 },
-  { text: "0x4D2E",   left: 7,  top: 78, delay: 0.8, duration: 8  },
-  { text: "> SCAN",   left: 4,  top: 92, delay: 2.2, duration: 10 },
-  { text: "0xFF3A",   left: 88, top: 12, delay: 1,   duration: 8  },
-  { text: "FF:AC:00", left: 92, top: 38, delay: 2.5, duration: 7  },
-  { text: "> AUTH",   left: 90, top: 62, delay: 0.3, duration: 12 },
-  { text: "0xF2B1",   left: 94, top: 82, delay: 3.5, duration: 9  },
-  { text: "> NULL",   left: 87, top: 95, delay: 1.8, duration: 8  },
-  { text: "0x00FF",   left: 15, top: 48, delay: 4,   duration: 10 },
-  { text: "> EXEC",   left: 80, top: 50, delay: 2,   duration: 11 },
-  { text: "FF:3A:01", left: 18, top: 88, delay: 0.5, duration: 7  },
-  { text: "0xC0DE",   left: 76, top: 22, delay: 3.2, duration: 9  },
+const R = 36;
+const COL_SPACING = R * 1.5;
+const ROW_SPACING = R * Math.sqrt(3);
+const ROWS = 25;
+const SVG_W = 160;
+
+function hexPoints(cx: number, cy: number): string {
+  return Array.from({ length: 6 }, (_, i) => {
+    const angle = (Math.PI / 3) * i;
+    return `${(cx + R * Math.cos(angle)).toFixed(1)},${(cy + R * Math.sin(angle)).toFixed(1)}`;
+  }).join(' ');
+}
+
+type HexData = { points: string; delay: string; duration: string };
+
+function buildColumn(cx: number, yOffset: boolean, startIdx: number): HexData[] {
+  return Array.from({ length: ROWS }, (_, row) => {
+    const cy = R + row * ROW_SPACING + (yOffset ? ROW_SPACING / 2 : 0);
+    const idx = startIdx + row;
+    return {
+      points: hexPoints(cx, cy),
+      delay: `${((idx * 1.618) % 9).toFixed(2)}s`,
+      duration: `${(5 + (idx * 2.3) % 9).toFixed(1)}s`,
+    };
+  });
+}
+
+const LEFT_HEXES: HexData[] = [
+  ...buildColumn(R / 2, false, 0),
+  ...buildColumn(R / 2 + COL_SPACING, true, ROWS),
 ];
 
-export const HexBackground = () => (
-  <div
+const RIGHT_HEXES: HexData[] = [
+  ...buildColumn(SVG_W - R / 2 - COL_SPACING, true, 0),
+  ...buildColumn(SVG_W - R / 2, false, ROWS),
+];
+
+const Panel = ({ hexes, side }: { hexes: HexData[]; side: "left" | "right" }) => (
+  <svg
     style={{
       position: "fixed",
-      inset: 0,
+      [side]: 0,
+      top: 0,
+      width: `${SVG_W}px`,
+      height: "100vh",
       zIndex: 1,
       pointerEvents: "none",
-      overflow: "hidden",
     }}
   >
-    {GLYPHS.map((g, i) => (
-      <span
+    {hexes.map((hex, i) => (
+      <polygon
         key={i}
-        className="hex-glyph"
-        style={{
-          left: `${g.left}%`,
-          top: `${g.top}%`,
-          animationDelay: `${g.delay}s`,
-          animationDuration: `${g.duration}s`,
-        }}
-      >
-        {g.text}
-      </span>
+        points={hex.points}
+        className="hex-shape"
+        style={{ animationDelay: hex.delay, animationDuration: hex.duration }}
+      />
     ))}
-  </div>
+  </svg>
+);
+
+export const HexBackground = () => (
+  <>
+    <Panel hexes={LEFT_HEXES} side="left" />
+    <Panel hexes={RIGHT_HEXES} side="right" />
+  </>
 );
