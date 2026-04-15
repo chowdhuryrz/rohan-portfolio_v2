@@ -4,8 +4,14 @@ export const EXPERIENCES = [
     title: "Cyber Security Engineer",
     company: "LOG(N) Pacific",
     companyUrl: "https://lognpacific.com",
-    description:
-      "Conduct vulnerability scanning and remediation across Windows and Linux servers using Tenable, delivering risk-prioritized reports that drive patching and hardening efforts. Automated remediation workflows with PowerShell, eliminating 100% of critical findings and reducing high/medium vulnerabilities by 90% and 76% respectively. Perform threat hunting and incident investigation using EDR tools, identifying indicators of compromise associated with brute force attempts, ransomware behaviors, and data exfiltration. Build custom KQL detection rules in Microsoft Sentinel and develop dashboards tracking logon failures and suspicious network traffic.",
+    points: [
+      "Conducted vulnerability scans with Tenable and implemented remediations using PowerShell, reducing critical vulnerabilities by 100%, high by 90%, and medium by 76% for the server team.",
+      "Performed vulnerability assessments and risk prioritization using Tenable across Windows and Linux environments, executing DISA STIG compliance audits to meet industry standards.",
+      "Automated remediation workflows and STIG implementations using PowerShell to systematically address critical vulnerabilities at scale.",
+      "Developed custom detection rules in Microsoft Defender for Endpoint to automate isolation and investigation of compromised systems.",
+      "Performed threat hunting using EDR to detect IoCs from brute force attacks, data exfiltration, and ransomware; designed and published scenarios for incident response tabletop exercises.",
+      "Built Microsoft Sentinel dashboards using KQL to monitor logon failures and malicious traffic, and eliminated brute force incidents by implementing inbound NSG/firewall rules to restrict internet exposure.",
+    ],
     technologies: [
       "Microsoft Sentinel",
       "Tenable",
@@ -21,8 +27,12 @@ export const EXPERIENCES = [
     title: "Software Engineer",
     company: "ASG",
     companyUrl: null as string | null,
-    description:
-      "Built and maintained an Employee Self-Service platform used by 500+ employees to manage HR records and requests. Developed internal admin tools that reduced access and record management effort by 65%. Integrated 12+ internal and external APIs to synchronize employee and operational data. Built geolocation and address verification features processing 10,000+ records per month, and improved platform reliability to 99.8% uptime via staging pipelines and replica database infrastructure.",
+    points: [
+      "Built and maintained internal HR software for 500+ employees, managing access controls, API integrations, and data validation to keep company systems secure and accurate.",
+      "Developed role-based access controls within internal admin tools by scoping permissions to user roles, reducing unauthorized access risk and cutting record management overhead by 65%.",
+      "Integrated 12+ internal and external APIs using secure authentication and data validation logic to synchronize employee records, ensuring data integrity across operational systems.",
+      "Implemented staging pipelines and replica database infrastructure to isolate production environments and improve fault tolerance, increasing platform uptime to 99.8%.",
+    ],
     technologies: [
       "TypeScript",
       "React",
@@ -87,13 +97,6 @@ export const CERTIFICATIONS = [
     credentialUrl: null as string | null,
   },
   {
-    name: "Google Cybersecurity Professional Certificate",
-    issuer: "Google",
-    date: "",
-    status: "active" as const,
-    credentialUrl: "https://www.coursera.org/account/accomplishments/professional-cert/certificate/AJZNXHK5C18V" as string | null,
-  },
-  {
     name: "NVIDIA-Certified Associate: AI Infrastructure and Operations",
     issuer: "NVIDIA",
     date: "Apr 2026",
@@ -106,6 +109,13 @@ export const CERTIFICATIONS = [
     date: "Mar 2026",
     status: "active" as const,
     credentialUrl: "https://www.credly.com/badges/cda56bfd-5bd8-4a75-b3e5-65472a5a8a54/linked_in_profile" as string | null,
+  },
+  {
+    name: "Google Cybersecurity Professional Certificate",
+    issuer: "Google",
+    date: "Feb 2026",
+    status: "active" as const,
+    credentialUrl: "https://www.coursera.org/account/accomplishments/professional-cert/certificate/AJZNXHK5C18V" as string | null,
   },
 ];
 
