@@ -45,9 +45,31 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "Vulnerability Management Program",
+    description:
+      "Simulated a full vulnerability management lifecycle from policy creation to remediation. Ran credentialed scans with Tenable on Azure VMs, prioritized findings, and remediated across four rounds. Reduced total vulnerabilities by 80% in the first cycle.",
+    technologies: ["Tenable", "Azure", "PowerShell", "Bash", "Vulnerability Management"],
+    image: null as string | null,
+    links: {
+      external: null as string | null,
+      github: "https://github.com/chowdhuryrz/vulnerability-management-program",
+    },
+  },
+  {
+    title: "Linux SSH Threat Analysis",
+    description:
+      "Python script that parses real Linux auth logs, detects brute force attacks, and exports structured data into a Splunk SIEM dashboard. Flagged 40 attacker IPs across 852 suspicious events from a real-world dataset.",
+    technologies: ["Python", "Splunk", "SIEM", "Log Analysis", "Threat Detection"],
+    image: null as string | null,
+    links: {
+      external: null as string | null,
+      github: "https://github.com/chowdhuryrz/linux-log-analysis",
+    },
+  },
+  {
     title: "STIG Hardening Scripts",
     description:
-      "PowerShell scripts to automate Windows 11 DISA STIG remediation. 10 scripts covering audit policy, Group Policy, and registry hardening. Each script reads back the registry value after writing to confirm the change stuck. No more manual compliance checks for DoD requirements.",
+      "10 PowerShell scripts that automate Windows 11 DISA STIG compliance. Covers audit policy, Group Policy, and registry hardening with built-in verification after each change.",
     technologies: ["PowerShell", "Windows", "DISA STIG", "Compliance", "Hardening"],
     image: null as string | null,
     links: {
@@ -58,7 +80,7 @@ export const PROJECTS = [
   {
     title: "Threat Hunt Reports",
     description:
-      "KQL investigation documentation and threat hunt reports using Microsoft Sentinel. Covers a Business Email Compromise attributed to Scattered Spider: a £24,500 wire fraud carried out through MFA fatigue. Each report includes MITRE ATT&CK mappings, IOC lists, an attack chain timeline, and containment steps.",
+      "Threat hunt reports built in Microsoft Sentinel using KQL. Covers a Business Email Compromise linked to Scattered Spider that resulted in a wire fraud through MFA fatigue. Each report includes MITRE ATT&CK mappings, IOCs, and containment steps.",
     technologies: ["KQL", "Microsoft Sentinel", "MITRE ATT&CK", "Blue Team", "SOC"],
     image: null as string | null,
     links: {
@@ -69,7 +91,7 @@ export const PROJECTS = [
   {
     title: "Threat Hunt: TOR Detection",
     description:
-      "Threat hunting scenario using Microsoft Defender for Endpoint to detect unauthorized TOR browser usage. Four KQL queries across endpoint data tables reconstruct a full 13-minute incident timeline, from download and silent install through network connections and file drops. Includes an IOC list and management report.",
+      "Threat hunt using Microsoft Defender for Endpoint to detect unauthorized TOR browser usage. KQL queries reconstruct the full incident timeline from download through network activity. Includes an IOC list and management report.",
     technologies: ["KQL", "Microsoft Defender", "EDR", "Threat Hunting", "Incident Response"],
     image: null as string | null,
     links: {
@@ -90,7 +112,7 @@ export const CERTIFICATIONS = [
     name: "CompTIA Security+",
     issuer: "CompTIA",
     date: "",
-    status: "active" as const,
+    status: "in-progress" as const,
     credentialUrl: null as string | null,
   },
   {
