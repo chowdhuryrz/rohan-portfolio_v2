@@ -17,6 +17,18 @@ const CERT_LOGOS: Record<string, LogoComponent> = {
   "Linux Essentials Certificate": LpiLogo,
 };
 
+const InProgressLabel = () => (
+  <span
+    className="ml-2 text-xs"
+    style={{
+      fontFamily: "'JetBrains Mono', monospace",
+      color: "hsl(var(--accent-green))",
+    }}
+  >
+    [in progress]
+  </span>
+);
+
 const SubHeading = ({ label }: { label: string }) => (
   <p
     className="text-xs uppercase tracking-widest mb-3"
@@ -54,15 +66,7 @@ export const Certifications = () => {
                   </p>
                   <p className="text-xs mt-0.5" style={{ color: "hsl(var(--text-muted))" }}>
                     {edu.school} · {edu.date}
-                    <span
-                      className="ml-2 text-xs"
-                      style={{
-                        fontFamily: "'JetBrains Mono', monospace",
-                        color: "hsl(var(--accent-green))",
-                      }}
-                    >
-                      [in progress]
-                    </span>
+                    {edu.status === "in-progress" && <InProgressLabel />}
                   </p>
                 </div>
               </div>
@@ -116,6 +120,7 @@ export const Certifications = () => {
                     <p className="text-xs mt-0.5" style={{ color: "hsl(var(--text-muted))" }}>
                       {cert.issuer}
                       {cert.date && ` · ${cert.date}`}
+                      {cert.status === "in-progress" && <InProgressLabel />}
                     </p>
                   </div>
                 </div>
