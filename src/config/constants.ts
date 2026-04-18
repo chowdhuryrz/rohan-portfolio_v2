@@ -11,7 +11,7 @@ export const SOCIAL_LINKS = [
   },
   {
     name: "resume",
-    href: "/Baseline_Resume.pdf",
+    href: "/Rohan_Chowdhury_Resume_V2.pdf",
     label: "Resume",
   },
 ] as const;
@@ -23,6 +23,6 @@ export const CONTACT = {
   tagline: "Threat Hunting. Vulnerability Management. Detection Engineering.",
 } as const;
 
-export const RESUME_URL = "/Baseline_Resume.pdf";
+export const RESUME_URL = "/Rohan_Chowdhury_Resume_V2.pdf";
 
 export type SocialLink = (typeof SOCIAL_LINKS)[number];

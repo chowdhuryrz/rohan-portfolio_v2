@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev          # Start dev server (Vite) — http://localhost:5173
+npm run dev          # Start dev server (Vite) — http://localhost:5173 (may use 8080 if 5173 is occupied)
 npm run build        # Production build
 npm run lint         # ESLint check
 npm run lint:fix     # ESLint auto-fix
@@ -87,6 +87,16 @@ Reference via `hsl(var(--accent-green))` in inline styles or CSS.
 **Hover pattern:** interactive elements use inline `onMouseEnter`/`onMouseLeave` to toggle between `--text-muted` and `--accent-green` rather than Tailwind hover classes, because Tailwind can't reference CSS variables in arbitrary values at runtime.
 
 **Project cards** render technologies as `--flag-name` CLI-style strings (lowercased, hyphenated). The first technology in the array becomes the category label in the card header. Cards show a `[CASE-001]` style ID based on array index.
+
+## Social Preview Image
+
+`public/og-image.png` is the `og:image` used by LinkedIn and other platforms for link thumbnails. It must be regenerated whenever the hero section changes:
+
+1. Start `npm run dev`
+2. Use Playwright to navigate to localhost, resize viewport to 1200×630, and screenshot to `public/og-image.png`
+3. The `og:image` tag in `index.html` points to `https://rohanchowdhury.com/og-image.png`
+
+After deploying, validate with LinkedIn Post Inspector to confirm the thumbnail is picked up.
 
 ## Favicon
 
