@@ -26,3 +26,6 @@ dist-ssr
 .claude
 .playwright-mcp
 .superpowers
+.env
+.env.*
+!.env.example
