@@ -106,3 +106,7 @@ Both files must be updated when changing the favicon — browsers request `/favi
 - `public/favicon.ico` — must be regenerated; contains 16×16 and 32×32 PNG frames
 
 The accent green `hsl(142,69%,58%)` is hardcoded in the SVG — CSS variables don't work in static SVG files. To regenerate `favicon.ico` without external tools, use Playwright to render the SVG to canvas at multiple sizes, capture base64 PNG, and pack into ICO format via a Node.js script.
+
+## Business context
+
+Who this is for, what it earns, and its status live in the wiki at `~/Brain/wiki/entities/Rohan Portfolio.md`. Read it before proposing scope.
