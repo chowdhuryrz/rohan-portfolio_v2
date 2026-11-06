@@ -1,1 +1,112 @@
-CLAUDE.md
+# AGENTS.md
+
+This file provides guidance to coding agents (Claude Code and Codex) when working with code in this repository.
+
+## Commands
+
+```bash
+npm run dev          # Start dev server (Vite) — http://localhost:5173 (may use 8080 if 5173 is occupied)
+npm run build        # Production build
+npm run lint         # ESLint check
+npm run lint:fix     # ESLint auto-fix
+npm run type-check   # TypeScript check (no emit)
+npm run preview      # Preview production build
+```
+
+No test suite is configured.
+
+## Architecture
+
+Single-page React portfolio, Vite + TypeScript + Tailwind CSS. All content is static — no API calls, no routing.
+
+**Component tree:**
+```
+PortfolioLayout
+├── FingerprintBackground  # animated SVG fingerprint, positioned absolutely behind content
+├── Hero                   # name, typewriter tagline, social icon links
+└── RightContent           # scrollable sections wrapped in SectionWrapper
+    ├── About
+    ├── Experience
+    ├── Projects
+    ├── Education & Certifications  ← rendered by Certifications component (src/components/portfolio/Certifications.tsx)
+    └── Contact + Footer
+```
+
+`SectionWrapper` applies a `reveal` / `visible` CSS class pair driven by `useInView` (intersection observer). This is the scroll-reveal animation — every section fades in when it enters the viewport.
+
+## Editing Content
+
+All portfolio content lives in two files — edit these, nothing else:
+
+- **`src/config/data.ts`** — `EXPERIENCES`, `PROJECTS`, `ABOUT_SECTIONS`, `CERTIFICATIONS`, `EDUCATION` arrays
+- **`src/config/constants.ts`** — `SOCIAL_LINKS`, `CONTACT` (name, email, title, tagline), `RESUME_URL`
+
+Each export is `as const` and has a corresponding type alias (`Experience`, `Project`, etc.) at the bottom of `data.ts`.
+
+## Styling
+
+Design tokens are CSS custom properties in `src/index.css`. The full palette:
+
+| Variable | Value | Usage |
+|---|---|---|
+| `--accent-green` | `142 69% 58%` | primary green, all interactive elements |
+| `--accent-green-dim` | `142 69% 58% / 0.15` | pill/button backgrounds |
+| `--accent-green-glow` | `142 69% 58% / 0.25` | glow drop-shadows |
+| `--accent-green-border` | `142 69% 58% / 0.3` | pill/button borders |
+| `--text-primary` | `0 0% 96%` | headings |
+| `--text-secondary` | `0 0% 65%` | body text |
+| `--text-muted` | `0 0% 45%` | timestamps, labels |
+| `--background` | `120 5% 6%` | page bg |
+| `--card` | `120 5% 7.5%` | project card bg |
+| `--card-hover` | `120 5% 9%` | card hover bg |
+| `--border` | `120 8% 14%` | generic borders |
+| `--divider` | `120 5% 10%` | subtle dividers |
+
+Reference via `hsl(var(--accent-green))` in inline styles or CSS.
+
+**Fonts:** Inter (body), JetBrains Mono (code labels, timestamps, tech pills). Both loaded from Google Fonts in `index.css`.
+
+**Component utility classes** (defined in `src/index.css` `@layer components`):
+- `.tech-pill` — green pill badge for technology tags in experience cards
+- `.experience-card` — hover border/glow card wrapper
+- `.experience-title-link` — monospace title with hover green
+- `.social-icon` — muted icon with green hover glow
+- `.section-heading` — section title with `>_` prefix and trailing gradient rule
+- `.reveal` / `.visible` — scroll-reveal animation classes
+- `.hero-name` — JetBrains Mono bold with green text-shadow glow
+- `.hero-line` / `.hero-line-{1-5}` — staggered entrance animations for Hero elements
+- `.cursor-blink` — blinking green block cursor used in typewriter
+- `.bullet-fade-in` — slide-in animation for experience bullet points
+- `.project-card` — classified-intel-brief style card with bottom green underline on hover
+- `.project-card-header` / `.project-case-id` / `.project-category` — card header row
+- `.project-card-body` — padded card content area
+- `.project-title-row` / `.project-title` / `.project-links` — title + icon link row
+- `.project-description` — body text inside project card
+- `.project-flags` / `.project-flag` — `--flag-name` CLI-style tech tags
+
+**Hover pattern:** interactive elements use inline `onMouseEnter`/`onMouseLeave` to toggle between `--text-muted` and `--accent-green` rather than Tailwind hover classes, because Tailwind can't reference CSS variables in arbitrary values at runtime.
+
+**Project cards** render technologies as `--flag-name` CLI-style strings (lowercased, hyphenated). The first technology in the array becomes the category label in the card header. Cards show a `[CASE-001]` style ID based on array index.
+
+## Social Preview Image
+
+`public/og-image.png` is the `og:image` used by LinkedIn and other platforms for link thumbnails. It must be regenerated whenever the hero section changes:
+
+1. Start `npm run dev`
+2. Use Playwright to navigate to localhost, resize viewport to 1200×630, and screenshot to `public/og-image.png`
+3. The `og:image` tag in `index.html` points to `https://rohanchowdhury.com/og-image.png`
+
+After deploying, validate with LinkedIn Post Inspector to confirm the thumbnail is picked up.
+
+## Favicon
+
+Both files must be updated when changing the favicon — browsers request `/favicon.ico` directly regardless of HTML `<link>` tags:
+
+- `public/favicon.svg` — primary (modern browsers, referenced in `index.html`)
+- `public/favicon.ico` — must be regenerated; contains 16×16 and 32×32 PNG frames
+
+The accent green `hsl(142,69%,58%)` is hardcoded in the SVG — CSS variables don't work in static SVG files. To regenerate `favicon.ico` without external tools, use Playwright to render the SVG to canvas at multiple sizes, capture base64 PNG, and pack into ICO format via a Node.js script.
+
+## Business context
+
+Who this is for, what it earns, and its status live in the wiki at `~/Brain/wiki/entities/Rohan Portfolio.md`. Read it before proposing scope.
