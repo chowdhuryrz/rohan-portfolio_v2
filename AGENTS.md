@@ -10,10 +10,9 @@ npm run build        # Production build
 npm run lint         # ESLint check
 npm run lint:fix     # ESLint auto-fix
 npm run type-check   # TypeScript check (no emit)
+npm test             # Vitest + Testing Library (jsdom); includes a production build check
 npm run preview      # Preview production build
 ```
-
-No test suite is configured.
 
 ## Architecture
 

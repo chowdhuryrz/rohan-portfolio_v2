@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -46,6 +47,10 @@ export default defineConfig(({ mode }) => ({
     },
     sourcemap: mode !== 'production',
     reportCompressedSize: false,
+  },
+  test: {
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
   },
   optimizeDeps: {
     include: [
