@@ -6,17 +6,17 @@ A modern, responsive portfolio website built with React, TypeScript, and Tailwin
 
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Modern Tech Stack**: Built with Vite, React, TypeScript, and Tailwind CSS
-- **Accessibility**: WCAG compliant with proper ARIA labels and semantic HTML
-- **Performance**: Optimized bundle with code splitting and lazy loading
-- **SEO Ready**: Meta tags, sitemap, and robots.txt included
-- **Error Handling**: Comprehensive error boundaries for production stability
-- **Testing**: Configured with Vitest and Testing Library
+- **Accessibility**: ARIA labels, semantic HTML, reduced-motion and print support
+- **Performance**: Small bundle (React vendor chunk + app chunk), fonts fetched in parallel, animation paused off screen
+- **SEO Ready**: Meta tags, Open Graph/Twitter cards and a canonical URL
+- **Error Handling**: An app-wide error boundary and a branded 404 page
+- **Testing**: Vitest and Testing Library
 
 ## 🛠️ Tech Stack
 
 - **Framework**: React 18 with TypeScript
 - **Build Tool**: Vite
-- **Styling**: Tailwind CSS + ShadCN UI components
+- **Styling**: Tailwind CSS
 - **Icons**: Lucide React
 - **Testing**: Vitest + Testing Library
 - **Linting**: ESLint with TypeScript rules
@@ -53,9 +53,8 @@ npm run preview      # Preview production build
 npm run lint         # Run ESLint
 npm run lint:fix     # Fix ESLint issues
 npm run type-check   # Run TypeScript type checking
-npm run test         # Run tests
-npm run test:ui      # Run tests with UI
-npm run test:coverage # Run tests with coverage
+npm test             # Run tests once
+npm run test:watch   # Run tests in watch mode
 ```
 
 ## 🚀 Deployment
@@ -70,10 +69,10 @@ The application is ready for deployment to any static hosting service:
 ### Build Configuration
 
 The production build is optimized with:
-- Code splitting for optimal loading
+- A separate React vendor chunk for long-term caching
 - CSS minification
 - Modern ES modules
-- Gzip compression ready
+- A `404.html` copy of `index.html`, which static hosts such as Netlify serve for unknown paths so the app can show its own 404 page
 
 ## 📁 Project Structure
 
@@ -81,42 +80,33 @@ The production build is optimized with:
 src/
 ├── components/          # Reusable UI components
 │   ├── portfolio/       # Portfolio-specific components
-│   ├── ui/             # ShadCN UI components
-│   └── __tests__/      # Component tests
-├── config/             # Configuration files
-│   ├── constants.ts    # App constants
-│   ├── data.ts         # Static data
-│   └── env.ts          # Environment variables
-├── hooks/              # Custom React hooks
-└── pages/              # Page components
+│   └── logos/           # Certification logos
+├── config/              # Configuration files
+│   ├── constants.ts     # App constants
+│   └── data.ts          # Static data
+├── hooks/               # Custom React hooks
+├── pages/               # Page components
+└── test/                # Test setup and build checks (other tests sit next to their code as *.test.ts[x])
 ```
 
 ## 🔧 Configuration
 
 ### Environment Variables
 
-Copy `.env.example` to `.env` and configure:
-
-```env
-NODE_ENV=development
-VITE_BASE_URL=http://localhost:8080
-VITE_CONTACT_EMAIL=your-email@example.com
-VITE_ENABLE_ANALYTICS=false
-```
+None. All content is static and lives in `src/config/`.
 
 ### SEO Configuration
 
-Update the following for your deployment:
-- `index.html` - Meta tags and canonical URLs
-- `public/sitemap.xml` - Site URLs
-- `public/robots.txt` - Crawling permissions
+Update the meta tags and canonical URL in `index.html` for your deployment.
 
 ## 📊 Performance
 
-- **Bundle Size**: ~603 kB (optimized with code splitting)
-- **Lighthouse Score**: 95+ (Performance, Accessibility, SEO)
-- **First Contentful Paint**: < 1.5s
-- **Time to Interactive**: < 3s
+Lab numbers from Lighthouse 12 (mobile, simulated throttling) against a local gzip server, November 2026:
+
+- **JavaScript**: 182 kB raw, 60 kB gzip, in 2 files
+- **Lighthouse**: Performance 93, Accessibility 95, Best Practices 100, SEO 100
+- **First Contentful Paint**: 2.5 s
+- **Largest Contentful Paint**: 2.6 s
 
 ## 🤝 Contributing
 

@@ -1,18 +1,16 @@
-import { useState } from "react";
 import { ExternalLink, ArrowUpRight, Github } from "lucide-react";
 import { EXPERIENCES, PROJECTS, ABOUT_SECTIONS } from "@/config/data";
 import { RESUME_URL, SOCIAL_LINKS, CONTACT } from "@/config/constants";
 import { Certifications } from "./Certifications";
+import { techFlag } from "./techFlag";
 import { useInView } from "@/hooks/useInView";
 
 const SectionWrapper = ({
   id,
   children,
-  delay = 0,
 }: {
   id: string;
   children: React.ReactNode;
-  delay?: number;
 }) => {
   const [ref, inView] = useInView<HTMLElement>(0.08);
   return (
@@ -20,7 +18,6 @@ const SectionWrapper = ({
       id={id}
       ref={ref}
       className={`reveal ${inView ? "visible" : ""}`}
-      style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
     </section>
@@ -28,8 +25,6 @@ const SectionWrapper = ({
 };
 
 export const RightContent = () => {
-  const [hoveredBullet, setHoveredBullet] = useState<{ expIndex: number; pointIndex: number } | null>(null);
-
   return (
     <main className="relative z-10 space-y-16 md:space-y-24 pb-16 md:pb-24">
 
@@ -74,34 +69,18 @@ export const RightContent = () => {
                     {exp.company}
                   </h3>
                   <ul className="space-y-1.5 mb-3 list-none">
-                    {exp.points.map((point, j) => {
-                      const isHovered = hoveredBullet?.expIndex === i && hoveredBullet?.pointIndex === j;
-                      return (
-                        <li
-                          key={j}
-                          className="flex gap-2 text-sm font-light leading-relaxed bullet-fade-in"
-                          style={{
-                            color: isHovered ? "hsl(var(--text-primary))" : "hsl(var(--text-secondary))",
-                            animationDelay: `${600 + j * 60}ms`,
-                          }}
-                          onMouseEnter={() => setHoveredBullet({ expIndex: i, pointIndex: j })}
-                          onMouseLeave={() => setHoveredBullet(null)}
-                        >
-                          <span
-                            style={{
-                              color: "hsl(var(--accent-green))",
-                              flexShrink: 0,
-                              marginTop: "2px",
-                              transform: isHovered ? "translateX(2px)" : "translateX(0)",
-                              transition: "transform 0.15s ease",
-                            }}
-                          >
-                            ▸
-                          </span>
-                          {point}
-                        </li>
-                      );
-                    })}
+                    {exp.points.map((point, j) => (
+                      <li
+                        key={j}
+                        className="experience-bullet flex gap-2 text-sm font-light leading-relaxed bullet-fade-in"
+                        style={{ animationDelay: `${600 + j * 60}ms` }}
+                      >
+                        <span className="experience-bullet-marker" aria-hidden="true">
+                          ▸
+                        </span>
+                        {point}
+                      </li>
+                    ))}
                   </ul>
                   <div className="flex flex-wrap gap-2">
                     {exp.technologies.map((tech) => (
@@ -167,7 +146,7 @@ export const RightContent = () => {
                         onMouseLeave={(e) =>
                           (e.currentTarget.style.color = "hsl(var(--text-muted))")
                         }
-                        aria-label="Live demo"
+                        aria-label={`${project.title} live demo`}
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
@@ -185,7 +164,7 @@ export const RightContent = () => {
                         onMouseLeave={(e) =>
                           (e.currentTarget.style.color = "hsl(var(--text-muted))")
                         }
-                        aria-label="GitHub repository"
+                        aria-label={`${project.title} GitHub repository`}
                       >
                         <Github className="w-3.5 h-3.5" />
                       </a>
@@ -200,7 +179,7 @@ export const RightContent = () => {
                 <div className="project-flags">
                   {project.technologies.map((tech) => (
                     <span key={tech} className="project-flag">
-                      --{tech.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}
+                      --{techFlag(tech)}
                     </span>
                   ))}
                 </div>

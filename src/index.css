@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -71,6 +69,10 @@
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover { background: hsl(var(--accent-green) / 0.5); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto; }
+  }
 }
 
 @layer components {
@@ -116,43 +118,6 @@
       animation: none;
       stroke-dashoffset: 0;
       opacity: 0.25;
-    }
-  }
-
-  /* ── Fingerprint background ── */
-  .fingerprint-ridge {
-    fill: none;
-    stroke: hsl(var(--accent-green));
-    stroke-width: 1.5;
-    stroke-dasharray: 1000;
-    animation-name: ridge-draw, ridge-glow;
-    animation-duration: 1.8s, 5s;
-    animation-fill-mode: both, none;
-    animation-timing-function: ease, ease-in-out;
-    animation-iteration-count: 1, infinite;
-  }
-
-  @keyframes ridge-draw {
-    from { stroke-dashoffset: 1000; opacity: 0; }
-    to   { stroke-dashoffset: 0; opacity: 0.55; }
-  }
-
-  @keyframes ridge-glow {
-    0%, 100% {
-      opacity: 0.45;
-      filter: drop-shadow(0 0 3px hsl(var(--accent-green) / 0.45));
-    }
-    50% {
-      opacity: 0.75;
-      filter: drop-shadow(0 0 10px hsl(var(--accent-green) / 0.7));
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .fingerprint-ridge {
-      animation: none;
-      stroke-dashoffset: 0;
-      opacity: 0.4;
     }
   }
 
@@ -212,6 +177,22 @@
   }
   .experience-card:hover .experience-title-link {
     color: hsl(var(--accent-green));
+  }
+
+  .experience-bullet {
+    color: hsl(var(--text-secondary));
+  }
+  .experience-bullet:hover {
+    color: hsl(var(--text-primary));
+  }
+  .experience-bullet-marker {
+    color: hsl(var(--accent-green));
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: transform 0.15s ease;
+  }
+  .experience-bullet:hover .experience-bullet-marker {
+    transform: translateX(2px);
   }
 
   /* Project cards: classified intel brief */
@@ -337,6 +318,7 @@
   }
   .section-heading::before {
     content: '>_';
+    content: '>_' / ''; /* decorative: empty alt text keeps it out of the heading name */
     color: hsl(var(--accent-green));
     font-size: 0.7rem;
     opacity: 0.8;
@@ -413,6 +395,22 @@
     to {
       opacity: 1;
       transform: translateX(0);
+    }
+  }
+
+  /* ── Reduced motion and print: show everything in its final state.
+        Without this, sections never scrolled into view print blank. ── */
+  @media print, (prefers-reduced-motion: reduce) {
+    .hero-line,
+    .bullet-fade-in,
+    .cursor-blink {
+      animation: none;
+      opacity: 1;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
   }
 }
