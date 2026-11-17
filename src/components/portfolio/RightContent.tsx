@@ -2,6 +2,7 @@ import { ExternalLink, ArrowUpRight, Github } from "lucide-react";
 import { EXPERIENCES, PROJECTS, ABOUT_SECTIONS } from "@/config/data";
 import { RESUME_URL, SOCIAL_LINKS, CONTACT } from "@/config/constants";
 import { Certifications } from "./Certifications";
+import { techFlag } from "./techFlag";
 import { useInView } from "@/hooks/useInView";
 
 const SectionWrapper = ({
@@ -178,7 +179,7 @@ export const RightContent = () => {
                 <div className="project-flags">
                   {project.technologies.map((tech) => (
                     <span key={tech} className="project-flag">
-                      --{tech.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}
+                      --{techFlag(tech)}
                     </span>
                   ))}
                 </div>

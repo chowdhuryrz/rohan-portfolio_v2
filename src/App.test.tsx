@@ -1,5 +1,5 @@
 import { act, render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { MockIntersectionObserver } from "@/test/setup";
 import { CERTIFICATIONS, PROJECTS } from "@/config/data";
 import { CONTACT } from "@/config/constants";
@@ -38,10 +38,24 @@ describe("App", () => {
   });
 
   it("gives screen readers the full tagline and a clean job title", () => {
-    renderAt("/");
-    expect(screen.getByRole("heading", { level: 2, name: CONTACT.title })).toBeTruthy();
-    const tagline = screen.getByText(CONTACT.tagline);
-    expect(tagline.className).toContain("sr-only");
+    vi.useFakeTimers();
+    try {
+      renderAt("/");
+      expect(screen.getByRole("heading", { level: 2, name: CONTACT.title })).toBeTruthy();
+
+      // While typing: one screen-reader copy, and the animated copy is hidden.
+      const srCopy = screen.getByText(CONTACT.tagline);
+      expect(srCopy.className).toContain("sr-only");
+      expect(srCopy.nextElementSibling?.getAttribute("aria-hidden")).toBe("true");
+
+      // Once typed: a single plain text node, so copy and find-in-page see it once.
+      act(() => vi.runAllTimers());
+      const typed = screen.getByText(CONTACT.tagline);
+      expect(typed.tagName).toBe("P");
+      expect(typed.textContent).toBe(CONTACT.tagline);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("names every icon-only link after what it points to", () => {

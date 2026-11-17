@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { techFlag } from "@/components/portfolio/techFlag";
 import { ABOUT_SECTIONS, CERTIFICATIONS, EDUCATION, EXPERIENCES, PROJECTS } from "./data";
 import { CONTACT, RESUME_URL, SOCIAL_LINKS } from "./constants";
 
@@ -37,8 +38,7 @@ describe("portfolio content", () => {
     for (const project of PROJECTS) {
       expect(project.technologies.length, project.title).toBeGreaterThan(0);
       for (const tech of project.technologies) {
-        const flag = tech.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-        expect(flag, `${project.title}: ${tech}`).toMatch(/^[a-z0-9]/);
+        expect(techFlag(tech), `${project.title}: ${tech}`).toMatch(/^[a-z0-9]/);
       }
     }
   });

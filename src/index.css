@@ -318,6 +318,7 @@
   }
   .section-heading::before {
     content: '>_';
+    content: '>_' / ''; /* decorative: empty alt text keeps it out of the heading name */
     color: hsl(var(--accent-green));
     font-size: 0.7rem;
     opacity: 0.8;

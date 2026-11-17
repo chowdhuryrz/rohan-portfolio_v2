@@ -51,17 +51,22 @@ export const Hero = () => {
           className="text-base md:text-lg font-light"
           style={{ color: "hsl(var(--text-secondary))" }}
         >
-          {/* Screen readers get the full tagline once instead of every keystroke. */}
-          <span className="sr-only">{CONTACT.tagline}</span>
-          <span aria-hidden="true">
-            {tagline}
-            {!taglineDone && (
-              <span
-                className="inline-block w-[2px] h-[1em] ml-[2px] align-middle animate-[blink_0.9s_step-end_infinite]"
-                style={{ background: "hsl(var(--text-muted))" }}
-              />
-            )}
-          </span>
+          {taglineDone ? (
+            CONTACT.tagline
+          ) : (
+            <>
+              {/* While typing, screen readers get the full tagline once
+                  instead of every keystroke. */}
+              <span className="sr-only">{CONTACT.tagline}</span>
+              <span aria-hidden="true">
+                {tagline}
+                <span
+                  className="inline-block w-[2px] h-[1em] ml-[2px] align-middle animate-[blink_0.9s_step-end_infinite]"
+                  style={{ background: "hsl(var(--text-muted))" }}
+                />
+              </span>
+            </>
+          )}
         </p>
       </div>
 
