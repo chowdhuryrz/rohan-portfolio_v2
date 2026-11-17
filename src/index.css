@@ -212,6 +212,22 @@
     color: hsl(var(--accent-green));
   }
 
+  .experience-bullet {
+    color: hsl(var(--text-secondary));
+  }
+  .experience-bullet:hover {
+    color: hsl(var(--text-primary));
+  }
+  .experience-bullet-marker {
+    color: hsl(var(--accent-green));
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: transform 0.15s ease;
+  }
+  .experience-bullet:hover .experience-bullet-marker {
+    transform: translateX(2px);
+  }
+
   /* Project cards: classified intel brief */
   .project-card {
     background: hsl(var(--card));
