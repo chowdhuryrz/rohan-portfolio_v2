@@ -7,11 +7,9 @@ import { useInView } from "@/hooks/useInView";
 const SectionWrapper = ({
   id,
   children,
-  delay = 0,
 }: {
   id: string;
   children: React.ReactNode;
-  delay?: number;
 }) => {
   const [ref, inView] = useInView<HTMLElement>(0.08);
   return (
@@ -19,7 +17,6 @@ const SectionWrapper = ({
       id={id}
       ref={ref}
       className={`reveal ${inView ? "visible" : ""}`}
-      style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
     </section>

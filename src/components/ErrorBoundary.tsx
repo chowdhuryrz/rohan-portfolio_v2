@@ -21,10 +21,6 @@ export class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error };
   }
 
-  public componentDidCatch() {
-    // Error caught by boundary
-  }
-
   public render() {
     if (this.state.hasError) {
       if (this.props.fallback) {
