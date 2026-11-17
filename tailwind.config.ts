@@ -7,6 +7,9 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+		// Test files are not shipped; words in them must not generate CSS.
+		"!./src/**/*.test.{ts,tsx}",
+		"!./src/test/**",
 	],
 	prefix: "",
 	theme: {
