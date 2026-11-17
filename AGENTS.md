@@ -64,7 +64,7 @@ Design tokens are CSS custom properties in `src/index.css`. The full palette:
 
 Reference via `hsl(var(--accent-green))` in inline styles or CSS.
 
-**Fonts:** Inter (body), JetBrains Mono (code labels, timestamps, tech pills). Both loaded from Google Fonts in `index.css`.
+**Fonts:** Inter (body), JetBrains Mono (code labels, timestamps, tech pills). Both loaded from Google Fonts by a `<link>` in `index.html`.
 
 **Component utility classes** (defined in `src/index.css` `@layer components`):
 - `.tech-pill` — green pill badge for technology tags in experience cards
