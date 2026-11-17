@@ -109,7 +109,7 @@ export const Certifications = () => {
                           rel="noopener noreferrer"
                           className="flex-shrink-0 transition-colors duration-200"
                           style={{ color: "hsl(var(--text-muted))" }}
-                          aria-label="View credential"
+                          aria-label={`${cert.name} credential`}
                           onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(var(--accent-green))")}
                           onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(var(--text-muted))")}
                         >

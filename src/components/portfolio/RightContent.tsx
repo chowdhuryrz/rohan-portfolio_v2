@@ -77,7 +77,9 @@ export const RightContent = () => {
                         className="experience-bullet flex gap-2 text-sm font-light leading-relaxed bullet-fade-in"
                         style={{ animationDelay: `${600 + j * 60}ms` }}
                       >
-                        <span className="experience-bullet-marker">▸</span>
+                        <span className="experience-bullet-marker" aria-hidden="true">
+                          ▸
+                        </span>
                         {point}
                       </li>
                     ))}
@@ -146,7 +148,7 @@ export const RightContent = () => {
                         onMouseLeave={(e) =>
                           (e.currentTarget.style.color = "hsl(var(--text-muted))")
                         }
-                        aria-label="Live demo"
+                        aria-label={`${project.title} live demo`}
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
@@ -164,7 +166,7 @@ export const RightContent = () => {
                         onMouseLeave={(e) =>
                           (e.currentTarget.style.color = "hsl(var(--text-muted))")
                         }
-                        aria-label="GitHub repository"
+                        aria-label={`${project.title} GitHub repository`}
                       >
                         <Github className="w-3.5 h-3.5" />
                       </a>

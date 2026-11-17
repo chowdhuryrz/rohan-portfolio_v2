@@ -69,6 +69,10 @@
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover { background: hsl(var(--accent-green) / 0.5); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto; }
+  }
 }
 
 @layer components {
@@ -427,6 +431,22 @@
     to {
       opacity: 1;
       transform: translateX(0);
+    }
+  }
+
+  /* ── Reduced motion and print: show everything in its final state.
+        Without this, sections never scrolled into view print blank. ── */
+  @media print, (prefers-reduced-motion: reduce) {
+    .hero-line,
+    .bullet-fade-in,
+    .cursor-blink {
+      animation: none;
+      opacity: 1;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
   }
 }

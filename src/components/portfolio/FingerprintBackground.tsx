@@ -29,6 +29,7 @@ export const FingerprintBackground = () => {
       ref={svgRef}
       viewBox="-5.0 -10.0 110.0 135.0"
       className="fingerprint-bg"
+      aria-hidden="true"
       style={{
         fill: "none",
         stroke: "hsl(142, 69%, 58%)",

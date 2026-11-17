@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
 
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export const useTypewriter = (text: string, speed = 32, startDelay = 0) => {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
+  const [reducedMotion] = useState(prefersReducedMotion);
+  const [displayed, setDisplayed] = useState(reducedMotion ? text : "");
+  const [done, setDone] = useState(reducedMotion);
 
   useEffect(() => {
+    if (reducedMotion) {
+      setDisplayed(text);
+      setDone(true);
+      return;
+    }
+
     setDisplayed("");
     setDone(false);
     let i = 0;
@@ -26,7 +36,7 @@ export const useTypewriter = (text: string, speed = 32, startDelay = 0) => {
       clearTimeout(start);
       clearInterval(timer);
     };
-  }, [text, speed, startDelay]);
+  }, [text, speed, startDelay, reducedMotion]);
 
   return { displayed, done };
 };
